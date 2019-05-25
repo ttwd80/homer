@@ -14,8 +14,10 @@ python:
 services:
   - postgresql
 addons:
-  postgresql: "11.2"  
+  postgresql: "11.2"
 before_script:
-  - psql postgres -c "CREATE USER homer WITH CREATEDB ENCRYPTED PASSWORD 'Iliad';" -U postgres
-  - psql postgres -c "CREATE DATABASE homer;" -U homer
+  - psql -c "CREATE USER homer WITH CREATEDB ENCRYPTED PASSWORD 'Iliad';" -U postgres postgres
+  - psql -c "CREATE DATABASE homer;" -U homer postgres
   - python manage.py runserver ${DJANGO_PORT}&
+script:
+  - python manage.py test
