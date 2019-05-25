@@ -1,0 +1,11 @@
+dist: xenial
+addons:
+  chrome: stable
+before_install:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+python:
+  - "3.7"
+before_script:
+  - psql -c "CREATE USER homer WITH CREATEDB ENCRYPTED PASSWORD 'Iliad';" -U postgres
+  - psql -c "CREATE DATABASE homer;" -U homer
+  - python manage.py runserver ${DJANGO_PORT}&
