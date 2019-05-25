@@ -3,18 +3,18 @@ addons:
   chrome: stable
 before_install:
   - sudo systemctl stop postgresql
+  - sudo apt-get --yes remove postgresql\*
+  - sudo apt-get install -y postgresql-11 postgresql-client-11
+  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+  - sudo service postgresql restart 11
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 language: python
 python:
   - "3.7"
-addons:
-  postgresql: "10"
-  apt:
-    packages:
-      - postgresql-10
-      - postgresql-client-10
 services:
   - postgresql
+addons:
+  postgresql: "11.2"  
 before_script:
   - psql postgres -c "CREATE USER homer WITH CREATEDB ENCRYPTED PASSWORD 'Iliad';" -U postgres
   - psql postgres -c "CREATE DATABASE homer;" -U homer
