@@ -2,6 +2,7 @@ dist: xenial
 addons:
   chrome: stable
 before_install:
+  - sudo systemctl stop postgresql
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 language: python
 python:
@@ -12,14 +13,9 @@ addons:
     packages:
       - postgresql-10
       - postgresql-client-10
-env:
-  global:
-    - PGPORT=5433
 services:
   - postgresql
 before_script:
-  - ls -la /var/run/postgresql/
-  - sudo netstat -pnlt
-  - psql postgres -p ${PGPORT} -c "CREATE USER homer WITH CREATEDB ENCRYPTED PASSWORD 'Iliad';" -U postgres
-  - psql postgres -p ${PGPORT} -c "CREATE DATABASE homer;" -U homer
+  - psql postgres -c "CREATE USER homer WITH CREATEDB ENCRYPTED PASSWORD 'Iliad';" -U postgres
+  - psql postgres -c "CREATE DATABASE homer;" -U homer
   - python manage.py runserver ${DJANGO_PORT}&
