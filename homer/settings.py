@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'homer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'homer',
+        'USER': os.env('DB_USERNAME'),
+        'PASSWORD': os.env('DB_PASSWORD'),
+        'HOST': os.env('DB_HOST'),
+        'PORT': os.env('DB_PORT')
     }
 }
 
