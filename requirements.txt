@@ -1,5 +1,0 @@
-psycopg2==2.8.2
-argon2-cffi==19.1.0
-Django==2.2.1
-selenium==3.141.0
-coverage==4.5.3
