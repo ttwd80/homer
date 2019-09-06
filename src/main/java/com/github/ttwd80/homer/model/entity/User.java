@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import lombok.Data;
 
 @Data
-@Entity
+@Entity(name = "\"user\"")
 public class User {
 
 	@Id
