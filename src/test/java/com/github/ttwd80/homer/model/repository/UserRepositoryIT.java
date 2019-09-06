@@ -26,8 +26,6 @@ class UserRepositoryIT {
 
     @BeforeEach
     void setUp() throws Exception {
-        roleRepository.deleteAll();
-        userRepository.deleteAll();
     }
 
     @Test
