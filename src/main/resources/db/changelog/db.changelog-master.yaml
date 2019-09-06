@@ -36,6 +36,9 @@ databaseChangeLog:
             name: id
             type: SEQUENCE
             defaultValue: user_role_id_seq
+            constraints:
+              primaryKey: true
+              nullable: false
         - column:
             name: username
             type: varchar(240)
