@@ -19,7 +19,7 @@ before_script:
   - psql -U postgres -c "CREATE USER ${DB_USERNAME} WITH CREATEDB ENCRYPTED PASSWORD '${DB_PASSWORD}';"
   - psql -U postgres -c "CREATE DATABASE homer WITH OWNER = ${DB_USERNAME};"
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  - sudo systemctl start xvfb
   - sleep 5 # give xvfb some time to start
   - curl -L https://github.com/mozilla/geckodriver/releases/download/v0.21.0/geckodriver-v0.21.0-linux64.tar.gz  | tar zxv
   - sudo mv -f geckodriver /usr/local/share/
