@@ -28,7 +28,6 @@ databaseChangeLog:
               nullable: false
     - createSequence:
         incrementBy: 1
-        ordered: true
         sequenceName: user_role_id_seq
     - createTable:
         tableName: user_role
