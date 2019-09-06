@@ -26,16 +26,13 @@ databaseChangeLog:
             constraints:
               primaryKey: true
               nullable: false
-    - createSequence:
-        incrementBy: 1
-        sequenceName: user_role_id_seq
     - createTable:
         tableName: user_role
         columns:
         - column:
             name: id
-            type: SEQUENCE
-            defaultValue: user_role_id_seq
+            type: BIGINT
+            autoIncrement: true
             constraints:
               primaryKey: true
               nullable: false
@@ -51,3 +48,8 @@ databaseChangeLog:
             constraints:
               foreignKeyName: user_role_rolename_fk
               references: role(rolename)
+    - addUniqueConstraint:
+        tableName: user_role
+        columnNames: username, rolename
+         
+               
