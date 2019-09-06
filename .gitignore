@@ -105,3 +105,4 @@ venv.bak/
 .classpath
 .factorypath
 .project
+.vscode/settings.json

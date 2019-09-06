@@ -7,14 +7,6 @@ before_install:
   - sudo apt-get install -y postgresql-11 postgresql-client-11
   - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
   - sudo service postgresql restart 11
-language: java
-jdk:
-  - openjdk11
-services:
-  - postgresql
-addons:
-  postgresql: "11.2"
-before_script:
   - psql -U postgres -c "CREATE USER ${SPRING_DATASOURCE_USERNAME} WITH CREATEDB ENCRYPTED PASSWORD '${SPRING_DATASOURCE_PASSWORD}';"
   - psql -U postgres -c "CREATE DATABASE homer WITH OWNER = ${SPRING_DATASOURCE_USERNAME};"
   - export DISPLAY=:99.0
@@ -24,6 +16,13 @@ before_script:
   - sudo mv -f geckodriver /usr/local/share/
   - sudo chmod +x /usr/local/share/geckodriver
   - sudo ln -s /usr/local/share/geckodriver /usr/local/bin/geckodriver
+language: java
+jdk:
+  - openjdk11
+services:
+  - postgresql
+addons:
+  postgresql: "11.2"
 script:
   - mvn clean test jacoco:report coveralls:report -DrepoToken=${COVERALLS_REPO_TOKEN} verify
 cache:
