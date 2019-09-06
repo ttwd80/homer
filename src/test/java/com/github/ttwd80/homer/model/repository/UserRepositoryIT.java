@@ -9,9 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 import com.github.ttwd80.homer.model.entity.User;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
-class UserRepositoryTest {
+class UserRepositoryIT {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -33,7 +35,6 @@ class UserRepositoryTest {
 		user.setPassword("random-password");
 		userRepository.save(user);
 		assertThat(userRepository.findById("random-id").get().getPassword()).isEqualTo("random-password");
-
 	}
 
 }
