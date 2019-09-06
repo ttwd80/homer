@@ -8,12 +8,43 @@ databaseChangeLog:
         columns:
         - column:
             name: username
-            type: varchar(255)
+            type: varchar(240)
             constraints:
               primaryKey: true
               nullable: false
         - column:
             name: password
-            type: varchar(255)
+            type: varchar(240)
             constraints:
               nullable: false
+    - createTable:
+        tableName: role
+        columns:
+        - column:
+            name: rolename
+            type: varchar(40)
+            constraints:
+              primaryKey: true
+              nullable: false
+    - createSequence:
+        incrementBy: 1
+        ordered: true
+        sequenceName: user_role_id_seq
+    - createTable:
+        tableName: user_role
+        columns:
+        - column:
+            name: id
+            type: bigint
+        - column:
+            name: username
+            type: varchar(240)
+            constraints:
+              foreignKeyName: user_role_username_fk
+              references: user(username)
+        - column:
+            name: rolename
+            type: varchar(40)
+            constraints:
+              foreignKeyName: user_role_rolename_fk
+              references: role(rolename)
