@@ -15,8 +15,8 @@ services:
 addons:
   postgresql: "11.2"
 before_script:
-  - psql -U postgres -c "CREATE USER ${DB_USERNAME} WITH CREATEDB ENCRYPTED PASSWORD '${DB_PASSWORD}';"
-  - psql -U postgres -c "CREATE DATABASE homer WITH OWNER = ${DB_USERNAME};"
+  - psql -U postgres -c "CREATE USER ${SPRING_DATASOURCE_USERNAME} WITH CREATEDB ENCRYPTED PASSWORD '${SPRING_DATASOURCE_PASSWORD}';"
+  - psql -U postgres -c "CREATE DATABASE homer WITH OWNER = ${SPRING_DATASOURCE_USERNAME};"
   - export DISPLAY=:99.0
   - sudo systemctl start xvfb
   - sleep 5 # give xvfb some time to start
