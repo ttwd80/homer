@@ -34,7 +34,8 @@ databaseChangeLog:
         columns:
         - column:
             name: id
-            type: bigint
+            type: SEQUENCE
+            defaultValue: user_role_id_seq
         - column:
             name: username
             type: varchar(240)
