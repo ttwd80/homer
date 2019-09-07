@@ -6,14 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class DefaultUserDetailServiceTest {
@@ -42,6 +41,7 @@ class DefaultUserDetailServiceTest {
         var user = new User();
         user.setUsername("normal-user");
         user.setPassword("random-password");
+        user.setRoles(Collections.emptySet());
         when(userRepository.findById("normal-user")).thenReturn(Optional.ofNullable(user));
         assertThat(sut.loadUserByUsername("normal-user").getPassword()).isEqualTo("random-password");
     }
